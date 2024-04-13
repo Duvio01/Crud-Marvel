@@ -1,0 +1,17 @@
+<mat-card>
+  <img mat-card-image [src]="imageHero" style="height: 19.5rem;" [alt]="hero.name">
+  <mat-card-header>
+    <mat-card-title>{{ hero.name }}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content class="mt-2 h-8rem">
+    <p class="font-bold">Fecha de modificacion <span class="font-normal">{{ hero.modified | date:'MMMM d, y, h:mm:ss a z'}}</span></p>
+    <mat-card-subtitle>{{ hero.description.length > 0 ? hero.description : 'Sin Descripción' }}</mat-card-subtitle>
+  </mat-card-content>
+  <mat-divider></mat-divider>
+  <mat-card-actions>
+    <button mat-raised color="primary" [routerLink]="['/heroes', hero.id]" mat-button>
+      <mat-icon>book</mat-icon>
+      Comics
+    </button>
+  </mat-card-actions>
+</mat-card>

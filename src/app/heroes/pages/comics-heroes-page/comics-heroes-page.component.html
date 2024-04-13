@@ -1,0 +1,63 @@
+<ng-template [ngIf]="loading">
+  <mat-grid-list cols="1" rowHeight="85vh">
+    <mat-grid-tile>
+      <mat-spinner></mat-spinner>
+    </mat-grid-tile>
+  </mat-grid-list>
+</ng-template>
+
+<ng-container *ngIf="!loading">
+  <div class="grid align-items-center">
+    <div class="col-1">
+      <button mat-icon-button (click)="goBack()" >
+        <mat-icon >arrow_back</mat-icon>
+      </button>
+    </div>
+    <div class="col-11 text-center">
+      <h1>Comics</h1>
+    </div>
+    <div class="col-12">
+      <table mat-table [dataSource]="dataTables" class="mat-elevation-z8">
+        <ng-container *ngFor="let column of columnsComics">
+          <ng-container [matColumnDef]="column.key">
+            <th mat-header-cell *matHeaderCellDef="">{{ column.name }}</th>
+            <td mat-cell *matCellDef="let element" class="p-2">
+              <div [ngSwitch]="column.type">
+                <div *ngSwitchCase="'currency'">
+                  {{ element[column.key] | currency}}
+                </div>
+                <div *ngSwitchCase="'image'">
+                  <img [src]="element[column.key]" style="height: 11.5rem;" [alt]="element['title']" />
+                </div>
+                <div *ngSwitchCase="'date'">
+                  {{ isValidDate(element[column.key])}}
+                </div>
+                <div *ngSwitchCase="'chip'">
+                  <mat-chip-list>
+                    <mat-chip *ngFor="let chip of element[column.key]">
+                      {{chip.name}}
+                    </mat-chip>
+                  </mat-chip-list>
+                </div>
+                <div *ngSwitchDefault>
+                  <div>{{element[column.key]}}</div>
+                </div>
+              </div>
+            </td>
+          </ng-container>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="keyColumns;"></tr>
+        <tr style="background: white" mat-row *matRowDef="let row; columns: keyColumns"></tr>
+        <tr style="background: white" class="mat-row" *matNoDataRow="">
+          <td class="mat-cell" style="font-weight: 600; text-align: center;" [attr.colspan]="keyColumns.length">
+            Sin Información
+          </td>
+        </tr>
+      </table>
+      <mat-paginator class="mt-5" *ngIf="configPaginator" (page)="onChangePage($event)" [length]="configPaginator.length"
+        [pageIndex]="configPaginator.pageIndex" [pageSize]="configPaginator.pageSize"
+        [pageSizeOptions]="[5, 10, 20, 50, 100]">
+      </mat-paginator>
+    </div>
+  </div>
+</ng-container>

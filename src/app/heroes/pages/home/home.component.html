@@ -1,0 +1,27 @@
+
+<app-search (searchHeroe)="setSearchHeroe($event)"></app-search>
+<ng-template [ngIf]="loading">
+  <mat-grid-list cols="1" rowHeight="85vh">
+    <mat-grid-tile>
+      <mat-spinner></mat-spinner>
+    </mat-grid-tile>
+  </mat-grid-list>
+</ng-template>
+<ng-container *ngIf="heroes.length > 0 && !loading">
+  <h1>Listado de Heroes</h1>
+  <mat-divider></mat-divider>
+
+  <div class="grid pt-2">
+    <div class="col-12 sm:col-4 md:col-4 xl:col-4" *ngFor="let hero of heroes">
+      <app-card-heroes [hero]="hero"></app-card-heroes>
+    </div>
+  </div>
+  <mat-paginator *ngIf="configPaginator" (page)="onChangePage($event)" [length]="configPaginator.length"
+    [pageIndex]="configPaginator.pageIndex" [pageSize]="configPaginator.pageSize"
+    [pageSizeOptions]="[6, 12, 30, 60, 100]">
+  </mat-paginator>
+</ng-container>
+
+<ng-template [ngIf]="heroes.length == 0 && !loading">
+  <h1>No existe heroes que contenta el nombre {{nameSearchHeore}}</h1>
+</ng-template>

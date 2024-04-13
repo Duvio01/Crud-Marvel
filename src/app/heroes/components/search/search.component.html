@@ -1,0 +1,11 @@
+<div class="grid p-2">
+  <div class="col-10">
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label>Buscar heroes por nombre</mat-label>
+      <input type="text" matInput (keydown.enter)="onSearch(false)" [formControl]="nameHeroe" />
+    </mat-form-field>
+  </div>
+  <div class="col-2">
+    <button class="w-full" style="height: 75%;" mat-raised-button color="accent" (click)="onSearch(true)">Reset busqueda</button>
+  </div>
+</div>

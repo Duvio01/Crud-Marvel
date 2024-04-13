@@ -14,7 +14,11 @@ export class CardHeroesComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+  /**
+  * Método get que retorna la url completa de la imagen del heroe
+  * @author Duvan Ramirez
+  * @createdate 2024-04-13
+  */
   get imageHero() {
     return `${this.hero.thumbnail.path}.${this.hero.thumbnail.extension}`
   }

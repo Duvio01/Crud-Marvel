@@ -28,7 +28,11 @@ export class HeroesPageComponent implements OnInit {
     this.keyColumns = this.columnsComics.map(column => column.key);
     this.getComicsHeroe()
   }
-
+  /**
+  * Método que realzia consulta de los comics del heroe
+  * @author Duvan Ramirez
+  * @createdate 2024-04-13
+  */
   getComicsHeroe(): void {
     this.dataTables = []
     this.loading = true
@@ -56,20 +60,30 @@ export class HeroesPageComponent implements OnInit {
         this.dataTables = table
       });
   }
-
-  urlImage(path: string, extension: string): string {
-    return `${path}.${extension}`
-  }
-
+  /**
+  * Método que valida si la fecha es valida y la formatea
+  * @param date string con la fecha
+  * @author Duvan Ramirez
+  * @createdate 2024-04-13
+  */
   isValidDate(date: string): string {
     const dateValid = moment(date).isValid();
     return dateValid ? moment(date).format('MMMM D, YYYY, hh:mm:ss A [GMT]Z') : moment.parseZone('-0001-11-30T00:00:00-0500').format('MMMM D, YYYY, hh:mm:ss A [GMT]Z');
   }
-
+  /**
+  * Método que retorna a la vista anterior
+  * @author Duvan Ramirez
+  * @createdate 2024-04-13
+  */
   goBack(): void {
     this.router.navigateByUrl('heroes')
   }
-
+  /**
+  * Método que stetea la data de paginacion
+  * @param event event que emite el campo de paginacion
+  * @author Duvan Ramirez
+  * @createdate 2024-04-13
+  */
   onChangePage(event: PageEvent): void {
     this.configPaginator.pageSize = event.pageSize
     this.configPaginator.pageIndex = event.pageIndex

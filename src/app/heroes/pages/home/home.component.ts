@@ -22,6 +22,11 @@ export class HomeComponent implements OnInit {
     this.getHeroes()
   }
 
+  /**
+  * Método que consulta los herores y setea la data a mostrar
+  * @author Duvan Ramirez
+  * @createdate 2024-04-13
+  */
   getHeroes():void{
     this.loading = true
     this.heroesService.getHeroes(this.configPaginator, this.nameSearchHeore).subscribe((resp:ResponseHeroes) => {
@@ -30,13 +35,23 @@ export class HomeComponent implements OnInit {
       this.loading = false
     })
   }
-
+  /**
+  * Método de paginacion
+  * @param event event que emite el paginador
+  * @author Duvan Ramirez
+  * @createdate 2024-04-13
+  */
   onChangePage(event: PageEvent):void{
     this.configPaginator.pageSize = event.pageSize
     this.configPaginator.pageIndex = event.pageIndex
     this.getHeroes()
   }
-
+  /**
+  * Método setea el nombre y realiza la busqueda
+  * @param event string con el nombre del heroe
+  * @author Duvan Ramirez
+  * @createdate 2024-04-13
+  */
   setSearchHeroe(event:string): void {
     this.nameSearchHeore = event
     this.getHeroes()

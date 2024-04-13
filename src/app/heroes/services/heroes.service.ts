@@ -19,15 +19,23 @@ export class HeroesService {
   private hash = md5(this.ts + this.apiKeyPrivate + this.apiKeyPublic);
   private keyHash: string = `?apikey=${this.apiKeyPublic}&ts=${this.ts}&hash=${this.hash}`
 
-  buildUrl(data: Paginator, nameHeroe: string, id:number): string {
-    const offset = data.pageIndex * data.pageSize
-    let url =  `${this.apiUrl}`
+  /**
+  * Método que construye la url segun los parametros definidos
+  * @param pagination objeto con la informacion de la paginacion
+  * @param nameHeroe string con el nombre del heroe
+  * @param id id del heroe
+  * @author Duvan Ramirez
+  * @createdate 2024-04-13
+  */
+  buildUrl(pagination: Paginator, nameHeroe: string, id: number): string {
+    const offset = pagination.pageIndex * pagination.pageSize
+    let url = `${this.apiUrl}`
 
-    if(id){
+    if (id) {
       url += `/${id}/comics`
     }
 
-    url += `${this.keyHash}&limit=${data.pageSize}`
+    url += `${this.keyHash}&limit=${pagination.pageSize}`
 
     if (offset > 0) {
       url += `&offset=${offset}`
@@ -38,12 +46,26 @@ export class HeroesService {
     return url
   }
 
-  getHeroes(data: Paginator, nameHeroe: string): Observable<ResponseHeroes> {
-    return this.http.get<ResponseHeroes>(this.buildUrl(data, nameHeroe, null))
+    /**
+  * Método que realiza la consulta de los heroes
+  * @param pagination objecto con la informacion de la paginacion
+  * @param nameHeroe string con el nombre del heroe
+  * @author Duvan Ramirez
+  * @createdate 2024-04-13
+  */
+  getHeroes(pagination: Paginator, nameHeroe: string): Observable<ResponseHeroes> {
+    return this.http.get<ResponseHeroes>(this.buildUrl(pagination, nameHeroe, null))
   }
 
-  getComics(id: number, data: Paginator): Observable<Comics> {
-    return this.http.get<Comics>(this.buildUrl(data, null, id))
+    /**
+  * Método que realiza la consulta de los comics de un heroe
+  * @param pagination objecto con la informacion de la paginacion
+  * @param id id del heroe
+  * @author Duvan Ramirez
+  * @createdate 2024-04-13
+  */
+  getComics(id: number, pagination: Paginator): Observable<Comics> {
+    return this.http.get<Comics>(this.buildUrl(pagination, null, id))
   }
 
 }

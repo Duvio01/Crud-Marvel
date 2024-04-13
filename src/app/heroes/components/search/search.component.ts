@@ -16,6 +16,12 @@ export class SearchComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  /**
+  * Método que envia al componente padre el nombre del heroe a buscar
+  * @param cleab booleano que valida si se limpia la busqueda
+  * @author Duvan Ramirez
+  * @createdate 2024-04-13
+  */
   onSearch(clean: boolean):void{
     clean && this.nameHeroe.setValue(null)
     this.searchHeroe.emit(this.nameHeroe.value)

@@ -33,11 +33,11 @@
                   {{ isValidDate(element[column.key])}}
                 </div>
                 <div *ngSwitchCase="'chip'">
-                  <mat-chip-list>
+                  <mat-chip-listbox>
                     <mat-chip *ngFor="let chip of element[column.key]">
                       {{chip.name}}
                     </mat-chip>
-                  </mat-chip-list>
+                  </mat-chip-listbox>
                 </div>
                 <div *ngSwitchDefault>
                   <div>{{element[column.key]}}</div>

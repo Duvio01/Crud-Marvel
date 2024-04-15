@@ -22,7 +22,7 @@ Para correr este proyecto se debe seguir los siguientes pasos:
    - apiKeyPublic = Public key que brinda la api de marvel
    - apiKeyPrivate = Private key que brinda la api de marvel
    - apiUrl = Colocar la siguiente url 'https://gateway.marvel.com:443/v1/public/characters'
-4. Correr el comando `npm i` 
+4. Correr el comando `npm i --force` 
 5. Posterior correr el proyecto con el comando `npm start`
 
 ![Imagen del logo de marvel](https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/Marvel_Studios_logo.svg/2560px-Marvel_Studios_logo.svg.png)
